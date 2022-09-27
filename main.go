@@ -1419,7 +1419,7 @@ func parseSchemaInfo(schemaJsonPath, provider string) (rsNames []string, dsNames
 	}
 
 	var mapResult map[string]interface{}
-	fmt.Println("parseSchemaInfo.path:", schemaJsonPath)
+	fmt.Println("parseSchemaInfo.path:", schemaJsonPath, string(input))
 	if err = json.Unmarshal(input, &mapResult); err != nil {
 		fmt.Println("parseSchemaInfo.Unmarshal", err)
 		return
