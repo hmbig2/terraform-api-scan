@@ -1414,14 +1414,14 @@ func filePathExists(path string) bool {
 func parseSchemaInfo(schemaJsonPath, provider string) (rsNames []string, dsNames []string, err error) {
 	input, err := ioutil.ReadFile(schemaJsonPath)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Println("parseSchemaInfo.read", err)
 		return
 	}
 
 	var mapResult map[string]interface{}
 
 	if err = json.Unmarshal(input, &mapResult); err != nil {
-		fmt.Println(err)
+		fmt.Println("parseSchemaInfo.Unmarshal", err)
 		return
 	}
 
