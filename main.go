@@ -106,7 +106,7 @@ func copy(outputDir, version, src string) error {
 	return nil
 }
 
-//将抽取出来的单独方法类写入调用的类中，这里是列举
+// 将抽取出来的单独方法类写入调用的类中，这里是列举
 func mergeFunctionFileToInvokeFile(serviceBasePath string) {
 	fileMap := map[string]string{
 		"compute_instance_v2_networking.go": "resource_huaweicloud_compute_instance.go",
@@ -668,7 +668,7 @@ func parseClientDecl(clientBeenUsed string, funcSrc string, curResourceFuncDecl 
 
 }
 
-//dnsClient, zoneType, err := chooseDNSClientbyZoneID(d, zoneID, meta) 特殊处理的client定义
+// dnsClient, zoneType, err := chooseDNSClientbyZoneID(d, zoneID, meta) 特殊处理的client定义
 func parseSpecialClientDecl(clientBeenUsed string, funcSrc string) string {
 	reg := regexp.MustCompile(fmt.Sprintf(`%s.*:=\schooseDNSClientbyZoneID`, clientBeenUsed))
 	isMatch := reg.MatchString(funcSrc)
@@ -678,7 +678,6 @@ func parseSpecialClientDecl(clientBeenUsed string, funcSrc string) string {
 	return ""
 }
 
-//
 func parseMethodbeenInvoke(funcName string, argsIndex int, resourceFileBytes []byte, funcDecls []*ast.FuncDecl, fset *token.FileSet) (clientBeenUsed string, funcSrc string, curResourceFuncDecl *ast.FuncDecl, exist bool) {
 	exist = false
 
@@ -951,7 +950,7 @@ func isSpecifyName(files []string, product, orignalName, curFilePath string) (na
 	return orignalName, ok
 }
 
-//未迁移至sdk的资源
+// 未迁移至sdk的资源
 func waitingUpdateResource(resourceName string) bool {
 	deprecateFiles := []string{
 		"data_source_huaweicloud_cdm_flavors_v1",
@@ -993,7 +992,7 @@ func parseEndPointByClient(clientName string) (r config.ServiceCatalog) {
 	return config.AllServiceCatalog[clientName]
 }
 
-//创建一个新的endpointFile, export 变量 allServiceCatalog
+// 创建一个新的endpointFile, export 变量 allServiceCatalog
 func buildNewEndPointFile(filePath string) {
 
 	resourceFilebytes, err := ioutil.ReadFile(filePath)
@@ -1033,7 +1032,7 @@ func TestEndpoint(t *testing.T) {
 
 }
 
-//保存 openstack/instances.{func} : uri
+// 保存 openstack/instances.{func} : uri
 var urlSupportsInUriFile = make(map[string]string)
 var urlSupportsInRequestFile = make(map[string]CloudUri)
 
@@ -1345,7 +1344,7 @@ func parseUriFromRequestFile(sdkFileDir string) {
 	parseRequestFuncNotDirect(set, sdkFileDir, resourceFilebytes, funcNotDirectUseURLs, urlSupportsInCurrentFile)
 }
 
-//reg1 := regexp.MustCompile(`\.(Head|Get|Post|Put|Patch|Delete|DeleteWithBody|DeleteWithResponse|DeleteWithBodyResp)\((\w*)\(`)
+// reg1 := regexp.MustCompile(`\.(Head|Get|Post|Put|Patch|Delete|DeleteWithBody|DeleteWithResponse|DeleteWithBodyResp)\((\w*)\(`)
 func mapToStandardHttpMethod(srcHttpMethod string) string {
 	switch srcHttpMethod {
 	case "Head":
